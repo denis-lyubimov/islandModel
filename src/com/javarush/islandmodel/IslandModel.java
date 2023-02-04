@@ -2,7 +2,6 @@ package com.javarush.islandmodel;
 
 import com.javarush.islandmodel.actionthreads.AnimalsActions;
 import com.javarush.islandmodel.actionthreads.PlantsActions;
-import com.javarush.islandmodel.actionthreads.PrinterActions;
 import com.javarush.islandmodel.island.Island;
 import com.javarush.islandmodel.island.LifeFormGenerator;
 import com.javarush.islandmodel.settings.IslandSettings;
@@ -28,7 +27,6 @@ public class IslandModel implements Runnable {
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(3);
         scheduledExecutorService.scheduleWithFixedDelay(new AnimalsActions(), 0, 2, TimeUnit.SECONDS);
         scheduledExecutorService.scheduleAtFixedRate(new PlantsActions(), 0, 2, TimeUnit.SECONDS);
-        scheduledExecutorService.scheduleAtFixedRate(new PrinterActions(printer), 0, 2100, TimeUnit.MILLISECONDS);
         int cycles = 1;
         while (true){
             try {
@@ -42,6 +40,9 @@ public class IslandModel implements Runnable {
                     System.out.println("Достигнуто максимальное количество циклов");
                     break;
                 }
+                System.out.println("Цикл " + cycles +" :");
+                printer.printEachCellInfo();
+                printer.printIslandInfo();
                 cycles++;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

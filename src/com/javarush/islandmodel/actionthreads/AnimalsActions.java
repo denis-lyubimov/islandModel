@@ -16,14 +16,12 @@ public class AnimalsActions implements Runnable {
 
     @Override
     public void run() {
-        synchronized (island) {
             checkAnimalsLevelOfHunger();
             reproduce();
             giveABirth();
             eat();
             move();
             increaseLevelOfHunger();
-        }
     }
 
     public void checkAnimalsLevelOfHunger() {

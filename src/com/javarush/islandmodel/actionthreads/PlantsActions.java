@@ -12,9 +12,7 @@ public class PlantsActions implements Runnable{
 
     @Override
     public void run() {
-        synchronized (island){
             growPlants();
-        }
     }
 
     private void growPlants(){
